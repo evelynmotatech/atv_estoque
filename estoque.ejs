@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <title>Sistema de Estoque</title>
+</head>
+
+<body>
+    <header class="container mt-3" id="inicioPagina">
+        <nav class="navbar menu navbar-expand-lg navbar-light">          
+          <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="/estoque">Estoque<span class="sr-only">(página atual)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/cadastrarProduto">Cadastrar Produto</a>
+              </li> 
+            </ul>            
+          </div>
+        </nav>
+      </header>
+    <section class="container">
+        <!-- PLUGING LIBRAS -->
+        <div vw class="enabled">
+            <div vw-access-button class="active"></div>
+            <div vw-plugin-wrapper>
+                <div class="vw-plugin-top-wrapper"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="row">
+            <div class="col">
+                <div class="row-6 mt-5 col-">
+                    <h1>Estoque</h1>
+                </div>                
+                <table class="table table-hover" id='myTable'>
+                    <thead>
+                        <tr>
+                            <th>Cód. Produto</th>
+                            <th>Produto</th>
+                            <th>Preço</th>
+                            <th>Quantidade</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if(lista_produtos==0){ %>
+                            <tr>
+                                <td colspan="5" class="alert alert-warning">Nenhum produto cadastrado</td>
+                            </tr>
+                            <% } else { lista_produtos.forEach(function(item){ %>
+                                <tr>
+
+                                    <td>
+                                        <%= item.id %>
+                                    </td>
+                                    <td>
+                                        <%= item.produto_estoque %>
+                                    </td>
+                                    <td>
+                                        <%= item.preco_estoque %>
+                                    </td>
+                                    <td>
+                                        <%= item.quant_estoque %>
+                                    </td>
+                                    <td>
+                                        <a href="/editarProduto/<%=item.id %>"
+                                            class="btn btn-outline-warning">Editar</a>
+
+                                        <button type="button" class="btn btn-outline-danger" data-toggle="modal"
+                                        data-target="#modal<%=item.id %>">
+                                            Apagar
+                                        </button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="modal<%=item.id %>" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Realmente quer
+                                                            deletar esse produto?</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Essa ação é irreversível.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Não</button>
+                                                        <a href="/deletarProduto/<%=item.id %>"
+                                                            class="btn btn-outline-danger">Apagar</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <% })}; %> 
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </section>    
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+        </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+        </script>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>
+        new window.VLibras.Widget('https://vlibras.gov.br/app');
+    </script>
+    <script src="/js/validacao.js"></script>
+    <script src="/js/search.js"></script>
+</body>
+
+</html>

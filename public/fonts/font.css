@@ -1,0 +1,8 @@
+@font-face {
+    src: url('../fonts/Quicksand-Regular.ttf');
+    font-family: 'Quicksand';    
+    font-weight: normal;
+} 
+body{
+	font-family: 'Quicksand'; 
+}
